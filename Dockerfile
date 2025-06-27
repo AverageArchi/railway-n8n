@@ -2,13 +2,11 @@ FROM n8nio/n8n
 
 USER root
 
-# Копируем package.json
-COPY package.json /usr/local/lib/n8n-custom/
+# Копируем package.json в рабочую директорию
+COPY package.json /usr/local/lib/n8n/
 
-# Устанавливаем зависимости
-RUN cd /usr/local/lib/n8n-custom && npm install
-
-# Указываем путь до node_modules, чтобы n8n мог их использовать
-ENV NODE_PATH="/usr/local/lib/n8n-custom/node_modules"
+# Переходим в неё и ставим зависимости глобально
+WORKDIR /usr/local/lib/n8n
+RUN npm install --omit=dev
 
 USER node
