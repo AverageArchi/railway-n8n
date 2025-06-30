@@ -2,17 +2,16 @@ FROM n8nio/n8n
 
 USER root
 
-# Копируем package.json
-COPY package.json /usr/local/lib/n8n/
+# Рабочая директория — внутрь самого пакета n8n
+WORKDIR /usr/local/lib/node_modules/n8n
 
-# Устанавливаем зависимости
-WORKDIR /usr/local/lib/n8n
+# Копируем package.json со списком кастомных зависимостей
+COPY package.json ./
+
+# Устанавливаем их прямо внутрь n8n
 RUN npm install --omit=dev
 
-# Указываем путь к внешним модулям
-ENV N8N_CUSTOM_EXTENSIONS="/usr/local/lib/n8n"
-
-# Включаем загрузку внешних модулей
+# Включаем поддержку внешних модулей
 ENV N8N_ENABLE_EXTERNAL_MODULES=true
 
 USER node
