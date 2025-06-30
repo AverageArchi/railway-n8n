@@ -1,7 +1,6 @@
 {
-  "name": "n8n-custom",
+  "name": "n8n-custom-modules",
   "version": "1.0.0",
-  "description": "Custom n8n with PDF support",
   "dependencies": {
     "pdf-lib": "^1.17.1",
     "png-js": "^1.0.0"
